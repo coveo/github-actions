@@ -2,17 +2,22 @@
   "name": "@coveo/merge-bot",
   "version": "1.0.0",
   "description": "Merge your PR if it satisfies all conditions",
-  "bin": "dist/index.js",
+  "bin": "dist/entry.js",
   "main": "lib/main.js",
+  "files": [
+    "dist",
+    "lib"
+  ],
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist lib",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
+    "package": "ncc build -m",
+    "post-package": "node build/postBuild.js",
     "test": "jest",
-    "all": "npm run clean && npm run build && npm run format && npm run lint && npm run package && npm test"
+    "all": "npm run clean && npm run build && npm run format && npm run lint && npm run package && npm run post-package && npm test"
   },
   "repository": {
     "type": "git",
