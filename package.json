@@ -1,0 +1,57 @@
+{
+  "name": "@coveo/merge-bot",
+  "version": "1.0.0",
+  "description": "Merge your PR if it satisfies all conditions",
+  "bin": "dist/index.js",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist lib",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint src/**/*.ts",
+    "package": "ncc build --source-map --license licenses.txt",
+    "test": "jest",
+    "all": "npm run clean && npm run build && npm run format && npm run lint && npm run package && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coveo/merge-bot.git"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup"
+  ],
+  "author": "Coveo",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@actions/github": "^5.0.0",
+    "dedent": "^0.7.0"
+  },
+  "devDependencies": {
+    "@octokit/webhooks-definitions": "^3.67.3",
+    "@types/dedent": "^0.7.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.3.3",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "@vercel/ncc": "^0.29.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-github": "^4.1.1",
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^27.0.6",
+    "js-yaml": "^4.1.0",
+    "prettier": "2.2.1",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^17.4.7",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.4.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

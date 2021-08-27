@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "extends": [":semanticPrefixFixDepsChoreOthers"],
+  "schedule": ["before 2am"],
+  "vulnerabilityAlerts": {
+    "commitMessageSuffix": "[SECURITY] J:CDX-227"
+  },
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "groupName": "all dependencies",
+      "groupSlug": "all"
+    }
+  ],
+  "rangeStrategy": "auto",
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "commitMessageSuffix": "J:CDX-227"
+}
