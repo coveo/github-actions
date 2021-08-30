@@ -7,6 +7,9 @@
       "conventionalCommits": true,
       "createRelease": "github",
       "message": "[skip ci] chore(release): publish"
+    },
+    "publish": {
+      "verifyAccess": false
     }
   }
 }
