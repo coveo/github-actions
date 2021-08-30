@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - name: Fetch all tags
-      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - name: Build & test
         run: |
           npm run setup
