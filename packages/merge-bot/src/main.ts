@@ -24,9 +24,9 @@ function isMergeRequested(): boolean {
   const after = (context.payload as IssueCommentEditedEvent).comment.body.split(
     "[x]"
   );
-  const before = (context.payload as IssueCommentEditedEvent).changes.body?.from.split(
-    "[ ]"
-  );
+  const before = (
+    context.payload as IssueCommentEditedEvent
+  ).changes.body?.from.split("[ ]");
   if (after.length !== 2 || before?.length !== 2) {
     return false;
   }

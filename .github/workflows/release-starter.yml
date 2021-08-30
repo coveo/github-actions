@@ -1,4 +1,4 @@
-name: "build-test"
+name: "Release"
 on:
   push:
     branches: [main]
@@ -12,10 +12,14 @@ jobs:
         uses: actions/checkout@v2
       - name: Build & test
         run: |
-          npm ci
-          npm run all
+          npm run setup
+          npx lerna run test
+      - name: Setup Git
+        run: |
+          git config --global user.email action@github.com
+          git config --global user.name GitHub Action
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-        run: npx semantic-release
+          GH_TOKEN: ${{ secrets.RELEASE_GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx lerna publish --yes

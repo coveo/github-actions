@@ -1,0 +1,54 @@
+{
+  "name": "merge-bot",
+  "version": "1.1.1",
+  "description": "Merge your PR if it satisfies all conditions",
+  "author": "Coveo",
+  "homepage": "https://github.com/coveo/github-action/merge-bot#readme",
+  "license": "Apache-2.0",
+  "bin": "dist/js",
+  "main": "lib/main.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coveo/github-action.git",
+    "directory": "packages/merge-bot"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist lib",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint src/**/*.ts",
+    "package": "ncc build -m",
+    "post-package": "node build/postBuild.js",
+    "test": "jest",
+    "all": "npm run clean && npm run build && npm run format && npm run lint && npm test && npm run package && npm run post-package",
+    "prepublishOnly": "npm run all"
+  },
+  "bugs": {
+    "url": "https://github.com/coveo/github-action/issues"
+  },
+  "dependencies": {
+    "@actions/github": "^5.0.0",
+    "dedent": "^0.7.0"
+  },
+  "devDependencies": {
+    "@octokit/webhooks-definitions": "^3.67.3",
+    "@types/dedent": "^0.7.0",
+    "@types/jest": "^27.0.1",
+    "@vercel/ncc": "^0.30.0",
+    "eslint": "^7.32.0",
+    "jest": "^27.1.0",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.2"
+  }
+}
