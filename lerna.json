@@ -6,7 +6,7 @@
       "allowBranch": "main",
       "conventionalCommits": true,
       "createRelease": "github",
-      "message": "[skip ci] chore(release): %s"
+      "message": "[skip ci] chore(release): publish"
     }
   }
 }
