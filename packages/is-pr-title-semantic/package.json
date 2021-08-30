@@ -5,7 +5,7 @@
   "author": "Coveo",
   "homepage": "https://github.com/coveo/github-actions/is-pr-title-semantic#readme",
   "license": "Apache-2.0",
-  "bin": "dist/js",
+  "bin": "dist/entry.js",
   "main": "lib/main.js",
   "directories": {
     "lib": "lib",
