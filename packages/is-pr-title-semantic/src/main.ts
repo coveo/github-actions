@@ -1,6 +1,6 @@
 import { context, getOctokit } from "@actions/github";
 import dedent from "dedent";
-import { spawnSync } from "child_process";
+import { spawn } from "child_process";
 import type { PullRequestEvent } from "@octokit/webhooks-definitions/schema";
 
 const octokit = getOctokit(process.env.GITHUB_TOKEN ?? "");
@@ -19,17 +19,28 @@ async function findInitialCommentId(): Promise<number | null> {
 }
 
 function runCommitLint() {
-  const commitLintProcess = spawnSync("npx", ["commitlint"], {
-    stdio: "inherit",
+  return new Promise<string | null>((resolve) => {
+    const commitlintProcess = spawn("npx", ["commitlint"]);
+    commitlintProcess.stdin.write(
+      (context.payload as PullRequestEvent).pull_request.title
+    );
+    commitlintProcess.stdin.end();
+    let output = "";
+    commitlintProcess.stderr.on("data", (data) => {
+      output += data.toString();
+    });
+    commitlintProcess.stdout.on("data", (data) => {
+      output += data.toString();
+    });
+    commitlintProcess.on("close", () => {
+      resolve(output);
+    });
   });
-  if (commitLintProcess.status !== 0) {
-    return commitLintProcess.stderr.toString();
-  }
 }
 
 async function run(): Promise<void> {
   const currentCommentId = await findInitialCommentId();
-  const commitLintResult = runCommitLint();
+  const commitLintResult = await runCommitLint();
   if (currentCommentId) {
     octokit.rest.issues.deleteComment({
       owner: context.repo.owner,
