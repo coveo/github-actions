@@ -35,6 +35,14 @@ function runCommitLint() {
   });
 }
 
+function emojify(input: string): string {
+  return input
+    .replace(/^⧗/gm, ":pencil2:")
+    .replace(/^✖/gm, ":x:")
+    .replace(/^ⓘ/gm, ":information_source:")
+    .replace(/^⚠/gm, ":warning:");
+}
+
 async function run(): Promise<void> {
   const currentCommentId = await findInitialCommentId();
   const commitLintResult = await runCommitLint();
@@ -53,7 +61,7 @@ async function run(): Promise<void> {
       body: dedent`
       ${BotCommentTag}
       Pull Request Title is not semantic:
-      ${commitLintResult.replace(/^/gm, "> ")}
+      ${emojify(commitLintResult).replace(/^/gm, "> ")}
     `,
     });
     process.exit(1);
