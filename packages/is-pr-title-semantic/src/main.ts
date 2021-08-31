@@ -26,9 +26,6 @@ function runCommitLint() {
     );
     commitlintProcess.stdin.end();
     let output = "";
-    commitlintProcess.stderr.on("data", (data) => {
-      output += data.toString();
-    });
     commitlintProcess.stdout.on("data", (data) => {
       output += data.toString();
     });
