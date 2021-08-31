@@ -26,4 +26,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.RELEASE_GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx lerna publish --yes
+        run: |
+          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+          npx lerna publish --yes
