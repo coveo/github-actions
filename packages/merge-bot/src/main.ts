@@ -76,6 +76,7 @@ async function attemptMerge(): Promise<void> {
       commit_title: `${
         (context.payload as IssueCommentEditedEvent).issue.title
       } (#${(context.payload as IssueCommentEditedEvent).issue.number})`,
+      commit_message: process.env.COMMIT_MESSAGE,
       merge_method: "squash",
     });
   } catch (error) {
