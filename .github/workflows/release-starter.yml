@@ -22,6 +22,22 @@ jobs:
         run: |
           git config --global user.email action@github.com
           git config --global user.name GitHub Action
+      - name: Setup SSH Remote
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${DEPLOY_KEY}"
+          mkdir -p ~/.ssh
+          echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
+          echo "Host coveo-github-actions" > ~/.ssh/config
+          echo "Hostname github.com" >> ~/.ssh/config
+          echo "PreferredAuthentications publickey" >> ~/.ssh/config
+          echo -n "IdentityFile " >> ~/.ssh/config
+          echo -n ~ >> ~/.ssh/config
+          echo "/.ssh/id_rsa" >> ~/.ssh/config
+          git remote set-url origin git@coveo-github-actions:coveo/github-actions.git
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.RELEASE_GH_TOKEN }}
