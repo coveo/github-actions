@@ -8,6 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          npm install
+          npm run setup
       - run: |
-          npm run all
+          npx lerna run all
