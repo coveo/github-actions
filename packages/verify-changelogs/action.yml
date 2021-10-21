@@ -1,0 +1,14 @@
+name: 'Check Changelogs'
+description: 'Check for text file containing change logs in the specified location'
+branding:
+  icon: 'check-circle'
+  color: 'green'
+
+inputs:
+  changeLogsLocation:
+    description: "Location of txt file(s) - Exemple : unreleased-changes/*.txt"
+    default: "unreleased-changes/*.txt" 
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
