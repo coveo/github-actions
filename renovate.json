@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "extends": [":semanticPrefixFixDepsChoreOthers"],
+  "extends": ["github>coveo/renovate-presets",":semanticPrefixFixDepsChoreOthers"],
   "schedule": ["before 3am on Monday"],
   "vulnerabilityAlerts": {
     "commitMessageSuffix": "[SECURITY] J:CDX-227"
