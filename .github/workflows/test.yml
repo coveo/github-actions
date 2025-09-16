@@ -2,10 +2,18 @@ name: "build-test"
 on: # rebuild any PRs and main branch changes
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v2
       - run: |
           npm run setup
